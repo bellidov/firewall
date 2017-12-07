@@ -21,4 +21,5 @@ public class SuperApiControllerTest {
 
 		assertEquals(response.getCode(), OK);
 	}
+
 }

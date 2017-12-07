@@ -1,5 +1,6 @@
 package com.luxoft.recruitment.cstr.filter;
 
+import com.luxoft.recruitment.cstr.datalayer.BlackListProvider;
 import com.luxoft.recruitment.cstr.http.Request;
 
 import java.util.ArrayList;
@@ -10,8 +11,7 @@ public class BlackListFilter {
 	private final List<String> blackList;
 
 	public BlackListFilter() {
-		blackList = new ArrayList<>();
-		blackList.add("74.125.224.72");
+		blackList = BlackListProvider.getInstance().getBlackList();
 	}
 
 	public boolean shouldBlock(Request request) {
