@@ -3,7 +3,6 @@ package com.luxoft.recruitment.cstr.filter;
 import com.luxoft.recruitment.cstr.datalayer.BlackListProvider;
 import com.luxoft.recruitment.cstr.http.Request;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BlackListFilter {

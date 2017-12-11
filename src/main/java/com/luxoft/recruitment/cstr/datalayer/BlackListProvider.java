@@ -1,21 +1,19 @@
 package com.luxoft.recruitment.cstr.datalayer;
 
+import com.luxoft.recruitment.cstr.common.BlackListProperties;
+
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 public class BlackListProvider {
     
     private static BlackListProvider provider;
 
-    private String PATH_NAME = "D:\\pios";
-    private String FILE_NAME = "blacklist.txt";
+    private String PATH_NAME = BlackListProperties.getInstance().getPathName();
+    private String FILE_NAME = BlackListProperties.getInstance().getFileName();
     //private static final Logger LOGGER = Logger.getLogger(BlackListProvider.class.getName());
     
     private List<String> blackList;
@@ -62,9 +60,6 @@ public class BlackListProvider {
             this.provider = provider;
         }
 
-        private void read() {
-            provider.readFromFile(Paths.get(PATH_NAME, FILE_NAME));
-        }
         @Override
         public void run() {
             try {
@@ -77,8 +72,7 @@ public class BlackListProvider {
                 while((key = service.take()) != null) {
                     Thread.sleep( 50 );
                     for(WatchEvent<?> event : key.pollEvents()) {
-                        System.out.println("Event kind: " + event.kind() + ". File affected: " + event.context() + ".");
-                        read();
+                        provider.readFromFile(Paths.get(PATH_NAME, FILE_NAME));
                     }
 
                     key.reset();

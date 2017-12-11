@@ -1,12 +1,9 @@
 package com.luxoft.recruitment.cstr;
 
-import com.luxoft.recruitment.cstr.datalayer.BlackListProvider;
 import com.luxoft.recruitment.cstr.http.Response;
 import com.luxoft.recruitment.cstr.filter.BlackListFilter;
 import com.luxoft.recruitment.cstr.http.Request;
 import com.luxoft.recruitment.cstr.service.HealthCheckService;
-
-import java.util.logging.Logger;
 
 import static com.luxoft.recruitment.cstr.http.HttpStatus.BAD_REQUEST;
 import static com.luxoft.recruitment.cstr.http.HttpStatus.OK;
