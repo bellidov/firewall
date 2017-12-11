@@ -22,12 +22,12 @@ public class BlackListFilterTest {
     @Mock
     private BlackListProvider provider;
 
-    @InjectMocks
     private BlackListFilter blackListFilter;
 
     @Before
     public void init() {
         when(provider.getBlackList()).thenReturn(Arrays.asList("172.16.1.76", "172.16.1.75"));
+        blackListFilter = new BlackListFilter(provider);
     }
 
     @Test
@@ -42,5 +42,14 @@ public class BlackListFilterTest {
         Request request = new Request("172.16.1.77");
         boolean response = blackListFilter.shouldBlock(request);
         assertFalse(response);
+    }
+
+    @Test
+    public void should_add_new_ip() {
+        String ip = "172.16.1.77";
+        blackListFilter.addIp(ip);
+
+        Request request = new Request(ip);
+        assertTrue(blackListFilter.shouldBlock(request));
     }
 }
