@@ -14,20 +14,10 @@ public class BlackListProvider {
 
     private String PATH_NAME = BlackListProperties.getInstance().getPathName();
     private String FILE_NAME = BlackListProperties.getInstance().getFileName();
-    //private static final Logger LOGGER = Logger.getLogger(BlackListProvider.class.getName());
-    
+
     private List<String> blackList;
 
     private BlackListProvider(){}
-    
-    {
-        readFromFile(Paths.get(PATH_NAME, FILE_NAME));
-
-        BlackListObserver observer = new BlackListObserver(this);
-        Thread thread = new Thread(observer);
-
-        thread.start();
-    }
     
     public static BlackListProvider getInstance(){
         if(provider == null) {
@@ -52,6 +42,14 @@ public class BlackListProvider {
             System.out.println("Unable to read from the file " + file.getFileName() + " as it does not exist.");        }
     }
 
+    {
+        readFromFile(Paths.get(PATH_NAME, FILE_NAME));
+
+        BlackListObserver observer = new BlackListObserver(this);
+        Thread thread = new Thread(observer);
+        thread.start();
+    }
+
     //inner class to observe the changes inside of black list file
     private class BlackListObserver implements Runnable {
         BlackListProvider provider;
@@ -70,7 +68,7 @@ public class BlackListProvider {
 
                 WatchKey key;
                 while((key = service.take()) != null) {
-                    Thread.sleep( 50 );
+                    //Thread.sleep( 50 );
                     for(WatchEvent<?> event : key.pollEvents()) {
                         provider.readFromFile(Paths.get(PATH_NAME, FILE_NAME));
                     }

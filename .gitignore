@@ -2,6 +2,7 @@
 # ------
 .gradle
 /build
+/out
 /buildSrc/build
 /subprojects/*/build
 /subprojects/docs/src/samples/*/*/build
