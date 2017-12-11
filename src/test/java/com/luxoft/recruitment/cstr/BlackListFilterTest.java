@@ -10,7 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -22,12 +23,15 @@ public class BlackListFilterTest {
     @Mock
     private BlackListProvider provider;
 
+    @InjectMocks
     private BlackListFilter blackListFilter;
 
     @Before
     public void init() {
-        when(provider.getBlackList()).thenReturn(Arrays.asList("172.16.1.76", "172.16.1.75"));
-        blackListFilter = new BlackListFilter(provider);
+        List<String> response = new ArrayList<>();
+        response.add("172.16.1.76");
+        response.add("172.16.1.75");
+        when(provider.getBlackList()).thenReturn(response);
     }
 
     @Test
