@@ -10,14 +10,12 @@ import static com.luxoft.recruitment.cstr.http.HttpStatus.OK;
 
 public class SuperApiController {
 
-	//private static final Logger LOGGER = Logger.getLogger(SuperApiController.class.getName());
-
 	private BlackListFilter blackListBlocker;
 	private HealthCheckService healthCheckService;
 
-	public SuperApiController() {
-		this.blackListBlocker = new BlackListFilter();
-		this.healthCheckService = new HealthCheckService();
+	public SuperApiController(HealthCheckService healthCheckService, BlackListFilter blackListBlocker) {
+		this.blackListBlocker = blackListBlocker;
+		this.healthCheckService = healthCheckService;
 	}
 
 	public Response healthCheck(Request request) {

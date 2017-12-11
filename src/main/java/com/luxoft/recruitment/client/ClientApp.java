@@ -1,5 +1,6 @@
 package com.luxoft.recruitment.client;
 
+import com.luxoft.recruitment.cstr.Context;
 import com.luxoft.recruitment.cstr.SuperApiController;
 import com.luxoft.recruitment.cstr.http.HttpStatus;
 import com.luxoft.recruitment.cstr.http.Request;
@@ -10,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class ClientApp {
 
-    private static SuperApiController controller = new SuperApiController();
+    private static SuperApiController controller = Context.getInstance().getSuperApiController();
 
     private static final Pattern PATTERN = Pattern.compile("^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
 

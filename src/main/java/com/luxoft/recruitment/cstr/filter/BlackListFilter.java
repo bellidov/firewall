@@ -7,16 +7,19 @@ import java.util.List;
 
 public class BlackListFilter {
 
-	private final List<String> blackList;
+	private BlackListProvider blackListProvider;
 
-	public BlackListFilter() {
-		blackList = BlackListProvider.getInstance().getBlackList();
-	}
+	public BlackListFilter(BlackListProvider blackListProvider){
+        this.blackListProvider = blackListProvider;
+    }
 
 	public boolean shouldBlock(Request request) {
-		if(blackList.contains(request.getIpAddress())) {
-			return true;
-		}
-		return false;
+	    List<String> blackList;
+	    if(blackListProvider == null || (blackList = blackListProvider.getBlackList()) == null){
+            return false;
+        }
+        else {
+	        return blackList.contains(request.getIpAddress());
+        }
 	}
 }

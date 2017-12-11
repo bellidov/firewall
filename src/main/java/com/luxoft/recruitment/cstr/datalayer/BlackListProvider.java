@@ -14,8 +14,7 @@ public class BlackListProvider {
 
     private String PATH_NAME = BlackListProperties.getInstance().getPathName();
     private String FILE_NAME = BlackListProperties.getInstance().getFileName();
-    //private static final Logger LOGGER = Logger.getLogger(BlackListProvider.class.getName());
-    
+
     private List<String> blackList;
 
     private BlackListProvider(){}
